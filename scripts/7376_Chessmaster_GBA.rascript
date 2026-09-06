@@ -84,82 +84,136 @@ Piece_RookB = 0x22
 Piece_BishopB = 0x23
 Piece_KnightB = 0x24
 Piece_PawnB = 0x25
-function ActualPieceOnA8() => byte(0x0199E0)
 
+// Actual chess board array
+// Layout: a8-b8-c8...g8
+//         a7-b7-c7...g7
+//         ...
+//         a1-b1-c1...g1
+ActualChessBoard = [
+    [byte(0x0199E0), byte(0x0199E4), byte(0x0199E8), byte(0x0199EC), byte(0x0199F0), byte(0x0199F4), byte(0x0199F8), byte(0x0199FC)],
+    [byte(0x019A20), byte(0x019A24), byte(0x019A28), byte(0x019A2C), byte(0x019A30), byte(0x019A34), byte(0x019A38), byte(0x019A3C)],
+    [byte(0x019A60), byte(0x019A64), byte(0x019A68), byte(0x019A6C), byte(0x019A70), byte(0x019A74), byte(0x019A78), byte(0x019A7C)],
+    [byte(0x019AA0), byte(0x019AA4), byte(0x019AA8), byte(0x019AAC), byte(0x019AB0), byte(0x019AB4), byte(0x019AB8), byte(0x019ABC)],
+    [byte(0x019AE0), byte(0x019AE4), byte(0x019AE8), byte(0x019AEC), byte(0x019AF0), byte(0x019AF4), byte(0x019AF8), byte(0x019AFC)],
+    [byte(0x019B20), byte(0x019B24), byte(0x019B28), byte(0x019B2C), byte(0x019B30), byte(0x019B34), byte(0x019B38), byte(0x019B3C)],
+    [byte(0x019B60), byte(0x019B64), byte(0x019B68), byte(0x019B6C), byte(0x019B70), byte(0x019B74), byte(0x019B78), byte(0x019B7C)],
+    [byte(0x019BA0), byte(0x019BA4), byte(0x019BA8), byte(0x019BAC), byte(0x019BB0), byte(0x019BB4), byte(0x019BB8), byte(0x019BBC)],
+]
+
+// Actual chess board array (colour only)
+// Layout: a8-b8-c8...g8
+//         a7-b7-c7...g7
+//         ...
+//         a1-b1-c1...g1
+ActualChessBoardColour = [
+    [high4(0x0199E0), high4(0x0199E4), high4(0x0199E8), high4(0x0199EC), high4(0x0199F0), high4(0x0199F4), high4(0x0199F8), high4(0x0199FC)],
+    [high4(0x019A20), high4(0x019A24), high4(0x019A28), high4(0x019A2C), high4(0x019A30), high4(0x019A34), high4(0x019A38), high4(0x019A3C)],
+    [high4(0x019A60), high4(0x019A64), high4(0x019A68), high4(0x019A6C), high4(0x019A70), high4(0x019A74), high4(0x019A78), high4(0x019A7C)],
+    [high4(0x019AA0), high4(0x019AA4), high4(0x019AA8), high4(0x019AAC), high4(0x019AB0), high4(0x019AB4), high4(0x019AB8), high4(0x019ABC)],
+    [high4(0x019AE0), high4(0x019AE4), high4(0x019AE8), high4(0x019AEC), high4(0x019AF0), high4(0x019AF4), high4(0x019AF8), high4(0x019AFC)],
+    [high4(0x019B20), high4(0x019B24), high4(0x019B28), high4(0x019B2C), high4(0x019B30), high4(0x019B34), high4(0x019B38), high4(0x019B3C)],
+    [high4(0x019B60), high4(0x019B64), high4(0x019B68), high4(0x019B6C), high4(0x019B70), high4(0x019B74), high4(0x019B78), high4(0x019B7C)],
+    [high4(0x019BA0), high4(0x019BA4), high4(0x019BA8), high4(0x019BAC), high4(0x019BB0), high4(0x019BB4), high4(0x019BB8), high4(0x019BBC)],
+]
+
+function ActualPieceOnA8() => byte(0x0199E0)
 // $0199E4: [8bit] Actual piece on b8
 function ActualPieceOnB8() => byte(0x0199E4)
-
 // $0199E8: [8bit] Actual piece on c8
 function ActualPieceOnC8() => byte(0x0199E8)
-
 // $0199EC: [8bit] Actual piece on d8
 function ActualPieceOnD8() => byte(0x0199EC)
-
 // $0199F0: [8bit] Actual piece on e8
 function ActualPieceOnE8() => byte(0x0199F0)
-
 // $0199F4: [8bit] Actual piece on f8
 function ActualPieceOnF8() => byte(0x0199F4)
-
 // $0199F8: [8bit] Actual piece on g8
 function ActualPieceOnG8() => byte(0x0199F8)
-
 // $0199FC: [8bit] Actual piece on h8
 function ActualPieceOnH8() => byte(0x0199FC)
-
 // $019A20: [8bit] Actual piece on a7
 function ActualPieceOnA7() => byte(0x019A20)
-
 // $019A24: [8bit] Actual piece on b7
 function ActualPieceOnB7() => byte(0x019A24)
-
 // $019A28: [8bit] Actual piece on c7
 function ActualPieceOnC7() => byte(0x019A28)
-
 // $019A2C: [8bit] Actual piece on d7
 function ActualPieceOnD7() => byte(0x019A2C)
-
 // $019A30: [8bit] Actual piece on e7
 function ActualPieceOnE7() => byte(0x019A30)
-
 // $019A34: [8bit] Actual piece on f7
 function ActualPieceOnF7() => byte(0x019A34)
-
 // $019A38: [8bit] Actual piece on g7
 function ActualPieceOnG7() => byte(0x019A38)
-
 // $019A3C: [8bit] Actual piece on h7
 function ActualPieceOnH7() => byte(0x019A3C)
-
+// $019A3C: [8bit] Actual piece on a6
+function ActualPieceOnA6() => byte(0x019A60)
+// $019A3C: [8bit] Actual piece on b6
+function ActualPieceOnB6() => byte(0x019A64)
 // $019A68: [8bit] Actual piece on c6
 function ActualPieceOnC6() => byte(0x019A68)
-
+// $019A68: [8bit] Actual piece on d6
+function ActualPieceOnD6() => byte(0x019A6C)
 // $019A70: [8bit] Actual piece on e6
 function ActualPieceOnE6() => byte(0x019A70)
-
+// $019A68: [8bit] Actual piece on f6
+function ActualPieceOnF6() => byte(0x019A74)
+// $019A68: [8bit] Actual piece on g6
+function ActualPieceOnG6() => byte(0x019A78)
+// $019A68: [8bit] Actual piece on h6
+function ActualPieceOnH6() => byte(0x019A7C)
+// $019AAC: [8bit] Actual piece on a5
+function ActualPieceOnA5() => byte(0x019AA0)
+// $019AAC: [8bit] Actual piece on b5
+function ActualPieceOnB5() => byte(0x019AA4)
+// $019AAC: [8bit] Actual piece on c5
+function ActualPieceOnC5() => byte(0x019AA8)
 // $019AAC: [8bit] Actual piece on d5
 function ActualPieceOnD5() => byte(0x019AAC)
-
 // $019AB0: [8bit] Actual piece on e5
 function ActualPieceOnE5() => byte(0x019AB0)
-
+// $019AB0: [8bit] Actual piece on f5
+function ActualPieceOnF5() => byte(0x019AB4)
+// $019AB0: [8bit] Actual piece on g5
+function ActualPieceOnG5() => byte(0x019AB8)
+// $019AB0: [8bit] Actual piece on h5
+function ActualPieceOnH5() => byte(0x019ABC)
+// $019AE8: [8bit] Actual piece on a4
+function ActualPieceOnA4() => byte(0x019AE0)
+// $019AE8: [8bit] Actual piece on b4
+function ActualPieceOnB4() => byte(0x019AE4)
 // $019AE8: [8bit] Actual piece on c4
 function ActualPieceOnC4() => byte(0x019AE8)
-
 // $019AEC: [8bit] Actual piece on d4
 function ActualPieceOnD4() => byte(0x019AEC)
-
 // $019AF0: [8bit] Actual piece on e4
 function ActualPieceOnE4() => byte(0x019AF0)
+// $019AF0: [8bit] Actual piece on f4
+function ActualPieceOnF4() => byte(0x019AF4)
+// $019AF0: [8bit] Actual piece on g4
+function ActualPieceOnG4() => byte(0x019AF8)
+// $019AF0: [8bit] Actual piece on h4
+function ActualPieceOnH4() => byte(0x019AFC)
 
+
+// $019B2C: [8bit] Actual piece on a3
+function ActualPieceOnA3() => byte(0x019B20)
+// $019B2C: [8bit] Actual piece on b3
+function ActualPieceOnB3() => byte(0x019B24)
+// $019B2C: [8bit] Actual piece on c3
+function ActualPieceOnC3() => byte(0x019B28)
 // $019B2C: [8bit] Actual piece on d3
 function ActualPieceOnD3() => byte(0x019B2C)
-
 // $019B30: [8bit] Actual piece on e3
 function ActualPieceOnE3() => byte(0x019B30)
-
 // $019B34: [8bit] Actual piece on f3
 function ActualPieceOnF3() => byte(0x019B34)
+// $019B34: [8bit] Actual piece on g3
+function ActualPieceOnG3() => byte(0x019B38)
+// $019B34: [8bit] Actual piece on h3
+function ActualPieceOnH3() => byte(0x019B3C)
 
 // $019B60: [8bit] Actual piece on a2
 function ActualPieceOnA2() => byte(0x019B60)
@@ -208,7 +262,6 @@ function ActualPieceOnG1() => byte(0x019BB8)
 
 // $019BBC: [8bit] Actual piece on h1
 function ActualPieceOnH1() => byte(0x019BBC)
-
 
 // $019C09: [8bit] Game over state
 //          0x00 = None
@@ -529,6 +582,536 @@ function DefeatOpponentWithTrigger(opponent) {
     return trigger_when(GameFinishedWinOpponent(opponent)) && CheatProtection() || ResetCheatProtection()
 }
 
+function ActualPawnsWhite() {
+    return ActualChessBoard[0][0] / 0x15 - ActualChessBoard[0][0] / 0x16 +
+           ActualChessBoard[0][1] / 0x15 - ActualChessBoard[0][1] / 0x16 +
+           ActualChessBoard[0][2] / 0x15 - ActualChessBoard[0][2] / 0x16 +
+           ActualChessBoard[0][3] / 0x15 - ActualChessBoard[0][3] / 0x16 +
+           ActualChessBoard[0][4] / 0x15 - ActualChessBoard[0][4] / 0x16 +
+           ActualChessBoard[0][5] / 0x15 - ActualChessBoard[0][5] / 0x16 +
+           ActualChessBoard[0][6] / 0x15 - ActualChessBoard[0][6] / 0x16 +
+           ActualChessBoard[0][7] / 0x15 - ActualChessBoard[0][7] / 0x16 +
+           ActualChessBoard[1][0] / 0x15 - ActualChessBoard[1][0] / 0x16 +
+           ActualChessBoard[1][1] / 0x15 - ActualChessBoard[1][1] / 0x16 +
+           ActualChessBoard[1][2] / 0x15 - ActualChessBoard[1][2] / 0x16 +
+           ActualChessBoard[1][3] / 0x15 - ActualChessBoard[1][3] / 0x16 +
+           ActualChessBoard[1][4] / 0x15 - ActualChessBoard[1][4] / 0x16 +
+           ActualChessBoard[1][5] / 0x15 - ActualChessBoard[1][5] / 0x16 +
+           ActualChessBoard[1][6] / 0x15 - ActualChessBoard[1][6] / 0x16 +
+           ActualChessBoard[1][7] / 0x15 - ActualChessBoard[1][7] / 0x16 +
+           ActualChessBoard[2][0] / 0x15 - ActualChessBoard[2][0] / 0x16 +
+           ActualChessBoard[2][1] / 0x15 - ActualChessBoard[2][1] / 0x16 +
+           ActualChessBoard[2][2] / 0x15 - ActualChessBoard[2][2] / 0x16 +
+           ActualChessBoard[2][3] / 0x15 - ActualChessBoard[2][3] / 0x16 +
+           ActualChessBoard[2][4] / 0x15 - ActualChessBoard[2][4] / 0x16 +
+           ActualChessBoard[2][5] / 0x15 - ActualChessBoard[2][5] / 0x16 +
+           ActualChessBoard[2][6] / 0x15 - ActualChessBoard[2][6] / 0x16 +
+           ActualChessBoard[2][7] / 0x15 - ActualChessBoard[2][7] / 0x16 +
+           ActualChessBoard[3][0] / 0x15 - ActualChessBoard[3][0] / 0x16 +
+           ActualChessBoard[3][1] / 0x15 - ActualChessBoard[3][1] / 0x16 +
+           ActualChessBoard[3][2] / 0x15 - ActualChessBoard[3][2] / 0x16 +
+           ActualChessBoard[3][3] / 0x15 - ActualChessBoard[3][3] / 0x16 +
+           ActualChessBoard[3][4] / 0x15 - ActualChessBoard[3][4] / 0x16 +
+           ActualChessBoard[3][5] / 0x15 - ActualChessBoard[3][5] / 0x16 +
+           ActualChessBoard[3][6] / 0x15 - ActualChessBoard[3][6] / 0x16 +
+           ActualChessBoard[3][7] / 0x15 - ActualChessBoard[3][7] / 0x16 +
+           ActualChessBoard[4][0] / 0x15 - ActualChessBoard[4][0] / 0x16 +
+           ActualChessBoard[4][1] / 0x15 - ActualChessBoard[4][1] / 0x16 +
+           ActualChessBoard[4][2] / 0x15 - ActualChessBoard[4][2] / 0x16 +
+           ActualChessBoard[4][3] / 0x15 - ActualChessBoard[4][3] / 0x16 +
+           ActualChessBoard[4][4] / 0x15 - ActualChessBoard[4][4] / 0x16 +
+           ActualChessBoard[4][5] / 0x15 - ActualChessBoard[4][5] / 0x16 +
+           ActualChessBoard[4][6] / 0x15 - ActualChessBoard[4][6] / 0x16 +
+           ActualChessBoard[4][7] / 0x15 - ActualChessBoard[4][7] / 0x16 +
+           ActualChessBoard[5][0] / 0x15 - ActualChessBoard[5][0] / 0x16 +
+           ActualChessBoard[5][1] / 0x15 - ActualChessBoard[5][1] / 0x16 +
+           ActualChessBoard[5][2] / 0x15 - ActualChessBoard[5][2] / 0x16 +
+           ActualChessBoard[5][3] / 0x15 - ActualChessBoard[5][3] / 0x16 +
+           ActualChessBoard[5][4] / 0x15 - ActualChessBoard[5][4] / 0x16 +
+           ActualChessBoard[5][5] / 0x15 - ActualChessBoard[5][5] / 0x16 +
+           ActualChessBoard[5][6] / 0x15 - ActualChessBoard[5][6] / 0x16 +
+           ActualChessBoard[5][7] / 0x15 - ActualChessBoard[5][7] / 0x16 +
+           ActualChessBoard[6][0] / 0x15 - ActualChessBoard[6][0] / 0x16 +
+           ActualChessBoard[6][1] / 0x15 - ActualChessBoard[6][1] / 0x16 +
+           ActualChessBoard[6][2] / 0x15 - ActualChessBoard[6][2] / 0x16 +
+           ActualChessBoard[6][3] / 0x15 - ActualChessBoard[6][3] / 0x16 +
+           ActualChessBoard[6][4] / 0x15 - ActualChessBoard[6][4] / 0x16 +
+           ActualChessBoard[6][5] / 0x15 - ActualChessBoard[6][5] / 0x16 +
+           ActualChessBoard[6][6] / 0x15 - ActualChessBoard[6][6] / 0x16 +
+           ActualChessBoard[6][7] / 0x15 - ActualChessBoard[6][7] / 0x16 +
+           ActualChessBoard[7][0] / 0x15 - ActualChessBoard[7][0] / 0x16 +
+           ActualChessBoard[7][1] / 0x15 - ActualChessBoard[7][1] / 0x16 +
+           ActualChessBoard[7][2] / 0x15 - ActualChessBoard[7][2] / 0x16 +
+           ActualChessBoard[7][3] / 0x15 - ActualChessBoard[7][3] / 0x16 +
+           ActualChessBoard[7][4] / 0x15 - ActualChessBoard[7][4] / 0x16 +
+           ActualChessBoard[7][5] / 0x15 - ActualChessBoard[7][5] / 0x16 +
+           ActualChessBoard[7][6] / 0x15 - ActualChessBoard[7][6] / 0x16 +
+           ActualChessBoard[7][7] / 0x15 - ActualChessBoard[7][7] / 0x16
+}
+
+function ActualPawnsBlack() {
+    return ActualChessBoard[0][0] / 0x25 - ActualChessBoard[0][0] / 0x26 +
+           ActualChessBoard[0][1] / 0x25 - ActualChessBoard[0][1] / 0x26 +
+           ActualChessBoard[0][2] / 0x25 - ActualChessBoard[0][2] / 0x26 +
+           ActualChessBoard[0][3] / 0x25 - ActualChessBoard[0][3] / 0x26 +
+           ActualChessBoard[0][4] / 0x25 - ActualChessBoard[0][4] / 0x26 +
+           ActualChessBoard[0][5] / 0x25 - ActualChessBoard[0][5] / 0x26 +
+           ActualChessBoard[0][6] / 0x25 - ActualChessBoard[0][6] / 0x26 +
+           ActualChessBoard[0][7] / 0x25 - ActualChessBoard[0][7] / 0x26 +
+           ActualChessBoard[1][0] / 0x25 - ActualChessBoard[1][0] / 0x26 +
+           ActualChessBoard[1][1] / 0x25 - ActualChessBoard[1][1] / 0x26 +
+           ActualChessBoard[1][2] / 0x25 - ActualChessBoard[1][2] / 0x26 +
+           ActualChessBoard[1][3] / 0x25 - ActualChessBoard[1][3] / 0x26 +
+           ActualChessBoard[1][4] / 0x25 - ActualChessBoard[1][4] / 0x26 +
+           ActualChessBoard[1][5] / 0x25 - ActualChessBoard[1][5] / 0x26 +
+           ActualChessBoard[1][6] / 0x25 - ActualChessBoard[1][6] / 0x26 +
+           ActualChessBoard[1][7] / 0x25 - ActualChessBoard[1][7] / 0x26 +
+           ActualChessBoard[2][0] / 0x25 - ActualChessBoard[2][0] / 0x26 +
+           ActualChessBoard[2][1] / 0x25 - ActualChessBoard[2][1] / 0x26 +
+           ActualChessBoard[2][2] / 0x25 - ActualChessBoard[2][2] / 0x26 +
+           ActualChessBoard[2][3] / 0x25 - ActualChessBoard[2][3] / 0x26 +
+           ActualChessBoard[2][4] / 0x25 - ActualChessBoard[2][4] / 0x26 +
+           ActualChessBoard[2][5] / 0x25 - ActualChessBoard[2][5] / 0x26 +
+           ActualChessBoard[2][6] / 0x25 - ActualChessBoard[2][6] / 0x26 +
+           ActualChessBoard[2][7] / 0x25 - ActualChessBoard[2][7] / 0x26 +
+           ActualChessBoard[3][0] / 0x25 - ActualChessBoard[3][0] / 0x26 +
+           ActualChessBoard[3][1] / 0x25 - ActualChessBoard[3][1] / 0x26 +
+           ActualChessBoard[3][2] / 0x25 - ActualChessBoard[3][2] / 0x26 +
+           ActualChessBoard[3][3] / 0x25 - ActualChessBoard[3][3] / 0x26 +
+           ActualChessBoard[3][4] / 0x25 - ActualChessBoard[3][4] / 0x26 +
+           ActualChessBoard[3][5] / 0x25 - ActualChessBoard[3][5] / 0x26 +
+           ActualChessBoard[3][6] / 0x25 - ActualChessBoard[3][6] / 0x26 +
+           ActualChessBoard[3][7] / 0x25 - ActualChessBoard[3][7] / 0x26 +
+           ActualChessBoard[4][0] / 0x25 - ActualChessBoard[4][0] / 0x26 +
+           ActualChessBoard[4][1] / 0x25 - ActualChessBoard[4][1] / 0x26 +
+           ActualChessBoard[4][2] / 0x25 - ActualChessBoard[4][2] / 0x26 +
+           ActualChessBoard[4][3] / 0x25 - ActualChessBoard[4][3] / 0x26 +
+           ActualChessBoard[4][4] / 0x25 - ActualChessBoard[4][4] / 0x26 +
+           ActualChessBoard[4][5] / 0x25 - ActualChessBoard[4][5] / 0x26 +
+           ActualChessBoard[4][6] / 0x25 - ActualChessBoard[4][6] / 0x26 +
+           ActualChessBoard[4][7] / 0x25 - ActualChessBoard[4][7] / 0x26 +
+           ActualChessBoard[5][0] / 0x25 - ActualChessBoard[5][0] / 0x26 +
+           ActualChessBoard[5][1] / 0x25 - ActualChessBoard[5][1] / 0x26 +
+           ActualChessBoard[5][2] / 0x25 - ActualChessBoard[5][2] / 0x26 +
+           ActualChessBoard[5][3] / 0x25 - ActualChessBoard[5][3] / 0x26 +
+           ActualChessBoard[5][4] / 0x25 - ActualChessBoard[5][4] / 0x26 +
+           ActualChessBoard[5][5] / 0x25 - ActualChessBoard[5][5] / 0x26 +
+           ActualChessBoard[5][6] / 0x25 - ActualChessBoard[5][6] / 0x26 +
+           ActualChessBoard[5][7] / 0x25 - ActualChessBoard[5][7] / 0x26 +
+           ActualChessBoard[6][0] / 0x25 - ActualChessBoard[6][0] / 0x26 +
+           ActualChessBoard[6][1] / 0x25 - ActualChessBoard[6][1] / 0x26 +
+           ActualChessBoard[6][2] / 0x25 - ActualChessBoard[6][2] / 0x26 +
+           ActualChessBoard[6][3] / 0x25 - ActualChessBoard[6][3] / 0x26 +
+           ActualChessBoard[6][4] / 0x25 - ActualChessBoard[6][4] / 0x26 +
+           ActualChessBoard[6][5] / 0x25 - ActualChessBoard[6][5] / 0x26 +
+           ActualChessBoard[6][6] / 0x25 - ActualChessBoard[6][6] / 0x26 +
+           ActualChessBoard[6][7] / 0x25 - ActualChessBoard[6][7] / 0x26 +
+           ActualChessBoard[7][0] / 0x25 - ActualChessBoard[7][0] / 0x26 +
+           ActualChessBoard[7][1] / 0x25 - ActualChessBoard[7][1] / 0x26 +
+           ActualChessBoard[7][2] / 0x25 - ActualChessBoard[7][2] / 0x26 +
+           ActualChessBoard[7][3] / 0x25 - ActualChessBoard[7][3] / 0x26 +
+           ActualChessBoard[7][4] / 0x25 - ActualChessBoard[7][4] / 0x26 +
+           ActualChessBoard[7][5] / 0x25 - ActualChessBoard[7][5] / 0x26 +
+           ActualChessBoard[7][6] / 0x25 - ActualChessBoard[7][6] / 0x26 +
+           ActualChessBoard[7][7] / 0x25 - ActualChessBoard[7][7] / 0x26
+}
+
+function ActualPieceCountWhite() {
+    return ActualChessBoardColour[0][0] % 2 +
+           ActualChessBoardColour[0][1] % 2 +
+           ActualChessBoardColour[0][2] % 2 +
+           ActualChessBoardColour[0][3] % 2 +
+           ActualChessBoardColour[0][4] % 2 +
+           ActualChessBoardColour[0][5] % 2 +
+           ActualChessBoardColour[0][6] % 2 +
+           ActualChessBoardColour[0][7] % 2 +
+           ActualChessBoardColour[1][0] % 2 +
+           ActualChessBoardColour[1][1] % 2 +
+           ActualChessBoardColour[1][2] % 2 +
+           ActualChessBoardColour[1][3] % 2 +
+           ActualChessBoardColour[1][4] % 2 +
+           ActualChessBoardColour[1][5] % 2 +
+           ActualChessBoardColour[1][6] % 2 +
+           ActualChessBoardColour[1][7] % 2 +
+           ActualChessBoardColour[2][0] % 2 +
+           ActualChessBoardColour[2][1] % 2 +
+           ActualChessBoardColour[2][2] % 2 +
+           ActualChessBoardColour[2][3] % 2 +
+           ActualChessBoardColour[2][4] % 2 +
+           ActualChessBoardColour[2][5] % 2 +
+           ActualChessBoardColour[2][6] % 2 +
+           ActualChessBoardColour[2][7] % 2 +
+           ActualChessBoardColour[3][0] % 2 +
+           ActualChessBoardColour[3][1] % 2 +
+           ActualChessBoardColour[3][2] % 2 +
+           ActualChessBoardColour[3][3] % 2 +
+           ActualChessBoardColour[3][4] % 2 +
+           ActualChessBoardColour[3][5] % 2 +
+           ActualChessBoardColour[3][6] % 2 +
+           ActualChessBoardColour[3][7] % 2 +
+           ActualChessBoardColour[4][0] % 2 +
+           ActualChessBoardColour[4][1] % 2 +
+           ActualChessBoardColour[4][2] % 2 +
+           ActualChessBoardColour[4][3] % 2 +
+           ActualChessBoardColour[4][4] % 2 +
+           ActualChessBoardColour[4][5] % 2 +
+           ActualChessBoardColour[4][6] % 2 +
+           ActualChessBoardColour[4][7] % 2 +
+           ActualChessBoardColour[5][0] % 2 +
+           ActualChessBoardColour[5][1] % 2 +
+           ActualChessBoardColour[5][2] % 2 +
+           ActualChessBoardColour[5][3] % 2 +
+           ActualChessBoardColour[5][4] % 2 +
+           ActualChessBoardColour[5][5] % 2 +
+           ActualChessBoardColour[5][6] % 2 +
+           ActualChessBoardColour[5][7] % 2 +
+           ActualChessBoardColour[6][0] % 2 +
+           ActualChessBoardColour[6][1] % 2 +
+           ActualChessBoardColour[6][2] % 2 +
+           ActualChessBoardColour[6][3] % 2 +
+           ActualChessBoardColour[6][4] % 2 +
+           ActualChessBoardColour[6][5] % 2 +
+           ActualChessBoardColour[6][6] % 2 +
+           ActualChessBoardColour[6][7] % 2 +
+           ActualChessBoardColour[7][0] % 2 +
+           ActualChessBoardColour[7][1] % 2 +
+           ActualChessBoardColour[7][2] % 2 +
+           ActualChessBoardColour[7][3] % 2 +
+           ActualChessBoardColour[7][4] % 2 +
+           ActualChessBoardColour[7][5] % 2 +
+           ActualChessBoardColour[7][6] % 2 +
+           ActualChessBoardColour[7][7] % 2
+}
+
+function ActualPieceCountBlack() {
+    return ActualChessBoardColour[0][0] / 2 +
+           ActualChessBoardColour[0][1] / 2 +
+           ActualChessBoardColour[0][2] / 2 +
+           ActualChessBoardColour[0][3] / 2 +
+           ActualChessBoardColour[0][4] / 2 +
+           ActualChessBoardColour[0][5] / 2 +
+           ActualChessBoardColour[0][6] / 2 +
+           ActualChessBoardColour[0][7] / 2 +
+           ActualChessBoardColour[1][0] / 2 +
+           ActualChessBoardColour[1][1] / 2 +
+           ActualChessBoardColour[1][2] / 2 +
+           ActualChessBoardColour[1][3] / 2 +
+           ActualChessBoardColour[1][4] / 2 +
+           ActualChessBoardColour[1][5] / 2 +
+           ActualChessBoardColour[1][6] / 2 +
+           ActualChessBoardColour[1][7] / 2 +
+           ActualChessBoardColour[2][0] / 2 +
+           ActualChessBoardColour[2][1] / 2 +
+           ActualChessBoardColour[2][2] / 2 +
+           ActualChessBoardColour[2][3] / 2 +
+           ActualChessBoardColour[2][4] / 2 +
+           ActualChessBoardColour[2][5] / 2 +
+           ActualChessBoardColour[2][6] / 2 +
+           ActualChessBoardColour[2][7] / 2 +
+           ActualChessBoardColour[3][0] / 2 +
+           ActualChessBoardColour[3][1] / 2 +
+           ActualChessBoardColour[3][2] / 2 +
+           ActualChessBoardColour[3][3] / 2 +
+           ActualChessBoardColour[3][4] / 2 +
+           ActualChessBoardColour[3][5] / 2 +
+           ActualChessBoardColour[3][6] / 2 +
+           ActualChessBoardColour[3][7] / 2 +
+           ActualChessBoardColour[4][0] / 2 +
+           ActualChessBoardColour[4][1] / 2 +
+           ActualChessBoardColour[4][2] / 2 +
+           ActualChessBoardColour[4][3] / 2 +
+           ActualChessBoardColour[4][4] / 2 +
+           ActualChessBoardColour[4][5] / 2 +
+           ActualChessBoardColour[4][6] / 2 +
+           ActualChessBoardColour[4][7] / 2 +
+           ActualChessBoardColour[5][0] / 2 +
+           ActualChessBoardColour[5][1] / 2 +
+           ActualChessBoardColour[5][2] / 2 +
+           ActualChessBoardColour[5][3] / 2 +
+           ActualChessBoardColour[5][4] / 2 +
+           ActualChessBoardColour[5][5] / 2 +
+           ActualChessBoardColour[5][6] / 2 +
+           ActualChessBoardColour[5][7] / 2 +
+           ActualChessBoardColour[6][0] / 2 +
+           ActualChessBoardColour[6][1] / 2 +
+           ActualChessBoardColour[6][2] / 2 +
+           ActualChessBoardColour[6][3] / 2 +
+           ActualChessBoardColour[6][4] / 2 +
+           ActualChessBoardColour[6][5] / 2 +
+           ActualChessBoardColour[6][6] / 2 +
+           ActualChessBoardColour[6][7] / 2 +
+           ActualChessBoardColour[7][0] / 2 +
+           ActualChessBoardColour[7][1] / 2 +
+           ActualChessBoardColour[7][2] / 2 +
+           ActualChessBoardColour[7][3] / 2 +
+           ActualChessBoardColour[7][4] / 2 +
+           ActualChessBoardColour[7][5] / 2 +
+           ActualChessBoardColour[7][6] / 2 +
+           ActualChessBoardColour[7][7] / 2
+}
+
+function PieceCountWhiteVsBlack() {
+    return ActualChessBoardColour[0][0] % 2 +
+           ActualChessBoardColour[0][1] % 2 +
+           ActualChessBoardColour[0][2] % 2 +
+           ActualChessBoardColour[0][3] % 2 +
+           ActualChessBoardColour[0][4] % 2 +
+           ActualChessBoardColour[0][5] % 2 +
+           ActualChessBoardColour[0][6] % 2 +
+           ActualChessBoardColour[0][7] % 2 +
+           ActualChessBoardColour[1][0] % 2 +
+           ActualChessBoardColour[1][1] % 2 +
+           ActualChessBoardColour[1][2] % 2 +
+           ActualChessBoardColour[1][3] % 2 +
+           ActualChessBoardColour[1][4] % 2 +
+           ActualChessBoardColour[1][5] % 2 +
+           ActualChessBoardColour[1][6] % 2 +
+           ActualChessBoardColour[1][7] % 2 +
+           ActualChessBoardColour[2][0] % 2 +
+           ActualChessBoardColour[2][1] % 2 +
+           ActualChessBoardColour[2][2] % 2 +
+           ActualChessBoardColour[2][3] % 2 +
+           ActualChessBoardColour[2][4] % 2 +
+           ActualChessBoardColour[2][5] % 2 +
+           ActualChessBoardColour[2][6] % 2 +
+           ActualChessBoardColour[2][7] % 2 +
+           ActualChessBoardColour[3][0] % 2 +
+           ActualChessBoardColour[3][1] % 2 +
+           ActualChessBoardColour[3][2] % 2 +
+           ActualChessBoardColour[3][3] % 2 +
+           ActualChessBoardColour[3][4] % 2 +
+           ActualChessBoardColour[3][5] % 2 +
+           ActualChessBoardColour[3][6] % 2 +
+           ActualChessBoardColour[3][7] % 2 +
+           ActualChessBoardColour[4][0] % 2 +
+           ActualChessBoardColour[4][1] % 2 +
+           ActualChessBoardColour[4][2] % 2 +
+           ActualChessBoardColour[4][3] % 2 +
+           ActualChessBoardColour[4][4] % 2 +
+           ActualChessBoardColour[4][5] % 2 +
+           ActualChessBoardColour[4][6] % 2 +
+           ActualChessBoardColour[4][7] % 2 +
+           ActualChessBoardColour[5][0] % 2 +
+           ActualChessBoardColour[5][1] % 2 +
+           ActualChessBoardColour[5][2] % 2 +
+           ActualChessBoardColour[5][3] % 2 +
+           ActualChessBoardColour[5][4] % 2 +
+           ActualChessBoardColour[5][5] % 2 +
+           ActualChessBoardColour[5][6] % 2 +
+           ActualChessBoardColour[5][7] % 2 +
+           ActualChessBoardColour[6][0] % 2 +
+           ActualChessBoardColour[6][1] % 2 +
+           ActualChessBoardColour[6][2] % 2 +
+           ActualChessBoardColour[6][3] % 2 +
+           ActualChessBoardColour[6][4] % 2 +
+           ActualChessBoardColour[6][5] % 2 +
+           ActualChessBoardColour[6][6] % 2 +
+           ActualChessBoardColour[6][7] % 2 +
+           ActualChessBoardColour[7][0] % 2 +
+           ActualChessBoardColour[7][1] % 2 +
+           ActualChessBoardColour[7][2] % 2 +
+           ActualChessBoardColour[7][3] % 2 +
+           ActualChessBoardColour[7][4] % 2 +
+           ActualChessBoardColour[7][5] % 2 +
+           ActualChessBoardColour[7][6] % 2 +
+           ActualChessBoardColour[7][7] % 2 -
+           ActualChessBoardColour[0][0] / 2 -
+           ActualChessBoardColour[0][1] / 2 -
+           ActualChessBoardColour[0][2] / 2 -
+           ActualChessBoardColour[0][3] / 2 -
+           ActualChessBoardColour[0][4] / 2 -
+           ActualChessBoardColour[0][5] / 2 -
+           ActualChessBoardColour[0][6] / 2 -
+           ActualChessBoardColour[0][7] / 2 -
+           ActualChessBoardColour[1][0] / 2 -
+           ActualChessBoardColour[1][1] / 2 -
+           ActualChessBoardColour[1][2] / 2 -
+           ActualChessBoardColour[1][3] / 2 -
+           ActualChessBoardColour[1][4] / 2 -
+           ActualChessBoardColour[1][5] / 2 -
+           ActualChessBoardColour[1][6] / 2 -
+           ActualChessBoardColour[1][7] / 2 -
+           ActualChessBoardColour[2][0] / 2 -
+           ActualChessBoardColour[2][1] / 2 -
+           ActualChessBoardColour[2][2] / 2 -
+           ActualChessBoardColour[2][3] / 2 -
+           ActualChessBoardColour[2][4] / 2 -
+           ActualChessBoardColour[2][5] / 2 -
+           ActualChessBoardColour[2][6] / 2 -
+           ActualChessBoardColour[2][7] / 2 -
+           ActualChessBoardColour[3][0] / 2 -
+           ActualChessBoardColour[3][1] / 2 -
+           ActualChessBoardColour[3][2] / 2 -
+           ActualChessBoardColour[3][3] / 2 -
+           ActualChessBoardColour[3][4] / 2 -
+           ActualChessBoardColour[3][5] / 2 -
+           ActualChessBoardColour[3][6] / 2 -
+           ActualChessBoardColour[3][7] / 2 -
+           ActualChessBoardColour[4][0] / 2 -
+           ActualChessBoardColour[4][1] / 2 -
+           ActualChessBoardColour[4][2] / 2 -
+           ActualChessBoardColour[4][3] / 2 -
+           ActualChessBoardColour[4][4] / 2 -
+           ActualChessBoardColour[4][5] / 2 -
+           ActualChessBoardColour[4][6] / 2 -
+           ActualChessBoardColour[4][7] / 2 -
+           ActualChessBoardColour[5][0] / 2 -
+           ActualChessBoardColour[5][1] / 2 -
+           ActualChessBoardColour[5][2] / 2 -
+           ActualChessBoardColour[5][3] / 2 -
+           ActualChessBoardColour[5][4] / 2 -
+           ActualChessBoardColour[5][5] / 2 -
+           ActualChessBoardColour[5][6] / 2 -
+           ActualChessBoardColour[5][7] / 2 -
+           ActualChessBoardColour[6][0] / 2 -
+           ActualChessBoardColour[6][1] / 2 -
+           ActualChessBoardColour[6][2] / 2 -
+           ActualChessBoardColour[6][3] / 2 -
+           ActualChessBoardColour[6][4] / 2 -
+           ActualChessBoardColour[6][5] / 2 -
+           ActualChessBoardColour[6][6] / 2 -
+           ActualChessBoardColour[6][7] / 2 -
+           ActualChessBoardColour[7][0] / 2 -
+           ActualChessBoardColour[7][1] / 2 -
+           ActualChessBoardColour[7][2] / 2 -
+           ActualChessBoardColour[7][3] / 2 -
+           ActualChessBoardColour[7][4] / 2 -
+           ActualChessBoardColour[7][5] / 2 -
+           ActualChessBoardColour[7][6] / 2 -
+           ActualChessBoardColour[7][7] / 2
+}
+
+function PieceCountBlackVsWhite() {
+    return ActualChessBoardColour[0][0] / 2 +
+           ActualChessBoardColour[0][1] / 2 +
+           ActualChessBoardColour[0][2] / 2 +
+           ActualChessBoardColour[0][3] / 2 +
+           ActualChessBoardColour[0][4] / 2 +
+           ActualChessBoardColour[0][5] / 2 +
+           ActualChessBoardColour[0][6] / 2 +
+           ActualChessBoardColour[0][7] / 2 +
+           ActualChessBoardColour[1][0] / 2 +
+           ActualChessBoardColour[1][1] / 2 +
+           ActualChessBoardColour[1][2] / 2 +
+           ActualChessBoardColour[1][3] / 2 +
+           ActualChessBoardColour[1][4] / 2 +
+           ActualChessBoardColour[1][5] / 2 +
+           ActualChessBoardColour[1][6] / 2 +
+           ActualChessBoardColour[1][7] / 2 +
+           ActualChessBoardColour[2][0] / 2 +
+           ActualChessBoardColour[2][1] / 2 +
+           ActualChessBoardColour[2][2] / 2 +
+           ActualChessBoardColour[2][3] / 2 +
+           ActualChessBoardColour[2][4] / 2 +
+           ActualChessBoardColour[2][5] / 2 +
+           ActualChessBoardColour[2][6] / 2 +
+           ActualChessBoardColour[2][7] / 2 +
+           ActualChessBoardColour[3][0] / 2 +
+           ActualChessBoardColour[3][1] / 2 +
+           ActualChessBoardColour[3][2] / 2 +
+           ActualChessBoardColour[3][3] / 2 +
+           ActualChessBoardColour[3][4] / 2 +
+           ActualChessBoardColour[3][5] / 2 +
+           ActualChessBoardColour[3][6] / 2 +
+           ActualChessBoardColour[3][7] / 2 +
+           ActualChessBoardColour[4][0] / 2 +
+           ActualChessBoardColour[4][1] / 2 +
+           ActualChessBoardColour[4][2] / 2 +
+           ActualChessBoardColour[4][3] / 2 +
+           ActualChessBoardColour[4][4] / 2 +
+           ActualChessBoardColour[4][5] / 2 +
+           ActualChessBoardColour[4][6] / 2 +
+           ActualChessBoardColour[4][7] / 2 +
+           ActualChessBoardColour[5][0] / 2 +
+           ActualChessBoardColour[5][1] / 2 +
+           ActualChessBoardColour[5][2] / 2 +
+           ActualChessBoardColour[5][3] / 2 +
+           ActualChessBoardColour[5][4] / 2 +
+           ActualChessBoardColour[5][5] / 2 +
+           ActualChessBoardColour[5][6] / 2 +
+           ActualChessBoardColour[5][7] / 2 +
+           ActualChessBoardColour[6][0] / 2 +
+           ActualChessBoardColour[6][1] / 2 +
+           ActualChessBoardColour[6][2] / 2 +
+           ActualChessBoardColour[6][3] / 2 +
+           ActualChessBoardColour[6][4] / 2 +
+           ActualChessBoardColour[6][5] / 2 +
+           ActualChessBoardColour[6][6] / 2 +
+           ActualChessBoardColour[6][7] / 2 +
+           ActualChessBoardColour[7][0] / 2 +
+           ActualChessBoardColour[7][1] / 2 +
+           ActualChessBoardColour[7][2] / 2 +
+           ActualChessBoardColour[7][3] / 2 +
+           ActualChessBoardColour[7][4] / 2 +
+           ActualChessBoardColour[7][5] / 2 +
+           ActualChessBoardColour[7][6] / 2 +
+           ActualChessBoardColour[7][7] / 2 -
+           ActualChessBoardColour[0][0] % 2 -
+           ActualChessBoardColour[0][1] % 2 -
+           ActualChessBoardColour[0][2] % 2 -
+           ActualChessBoardColour[0][3] % 2 -
+           ActualChessBoardColour[0][4] % 2 -
+           ActualChessBoardColour[0][5] % 2 -
+           ActualChessBoardColour[0][6] % 2 -
+           ActualChessBoardColour[0][7] % 2 -
+           ActualChessBoardColour[1][0] % 2 -
+           ActualChessBoardColour[1][1] % 2 -
+           ActualChessBoardColour[1][2] % 2 -
+           ActualChessBoardColour[1][3] % 2 -
+           ActualChessBoardColour[1][4] % 2 -
+           ActualChessBoardColour[1][5] % 2 -
+           ActualChessBoardColour[1][6] % 2 -
+           ActualChessBoardColour[1][7] % 2 -
+           ActualChessBoardColour[2][0] % 2 -
+           ActualChessBoardColour[2][1] % 2 -
+           ActualChessBoardColour[2][2] % 2 -
+           ActualChessBoardColour[2][3] % 2 -
+           ActualChessBoardColour[2][4] % 2 -
+           ActualChessBoardColour[2][5] % 2 -
+           ActualChessBoardColour[2][6] % 2 -
+           ActualChessBoardColour[2][7] % 2 -
+           ActualChessBoardColour[3][0] % 2 -
+           ActualChessBoardColour[3][1] % 2 -
+           ActualChessBoardColour[3][2] % 2 -
+           ActualChessBoardColour[3][3] % 2 -
+           ActualChessBoardColour[3][4] % 2 -
+           ActualChessBoardColour[3][5] % 2 -
+           ActualChessBoardColour[3][6] % 2 -
+           ActualChessBoardColour[3][7] % 2 -
+           ActualChessBoardColour[4][0] % 2 -
+           ActualChessBoardColour[4][1] % 2 -
+           ActualChessBoardColour[4][2] % 2 -
+           ActualChessBoardColour[4][3] % 2 -
+           ActualChessBoardColour[4][4] % 2 -
+           ActualChessBoardColour[4][5] % 2 -
+           ActualChessBoardColour[4][6] % 2 -
+           ActualChessBoardColour[4][7] % 2 -
+           ActualChessBoardColour[5][0] % 2 -
+           ActualChessBoardColour[5][1] % 2 -
+           ActualChessBoardColour[5][2] % 2 -
+           ActualChessBoardColour[5][3] % 2 -
+           ActualChessBoardColour[5][4] % 2 -
+           ActualChessBoardColour[5][5] % 2 -
+           ActualChessBoardColour[5][6] % 2 -
+           ActualChessBoardColour[5][7] % 2 -
+           ActualChessBoardColour[6][0] % 2 -
+           ActualChessBoardColour[6][1] % 2 -
+           ActualChessBoardColour[6][2] % 2 -
+           ActualChessBoardColour[6][3] % 2 -
+           ActualChessBoardColour[6][4] % 2 -
+           ActualChessBoardColour[6][5] % 2 -
+           ActualChessBoardColour[6][6] % 2 -
+           ActualChessBoardColour[6][7] % 2 -
+           ActualChessBoardColour[7][0] % 2 -
+           ActualChessBoardColour[7][1] % 2 -
+           ActualChessBoardColour[7][2] % 2 -
+           ActualChessBoardColour[7][3] % 2 -
+           ActualChessBoardColour[7][4] % 2 -
+           ActualChessBoardColour[7][5] % 2 -
+           ActualChessBoardColour[7][6] % 2 -
+           ActualChessBoardColour[7][7] % 2
+}
+
 
 achievement(
     title = "WARNING", points = 0,
@@ -743,9 +1326,9 @@ achievement(
     trigger = CheatProtection() && trigger_when(GameFinishedWin()) &&
               (
                  // Alt1 (player colour white)
-                 (PlayerColour() == Colour_White && measured(repeated(3, TurnChangedToPlayer() && (3 + PieceCountWhite()) <= PieceCountBlack()))) ||
+                 (PlayerColour() == Colour_White && measured(repeated(3, TurnChangedToPlayer() && PieceCountBlackVsWhite() >= 3))) ||
                  // Alt2 (player colour black)
-                 (PlayerColour() == Colour_Black && measured(repeated(3, TurnChangedToPlayer() && (3 + PieceCountBlack()) <= PieceCountWhite()))) ||
+                 (PlayerColour() == Colour_Black && measured(repeated(3, TurnChangedToPlayer() && PieceCountWhiteVsBlack() >= 3))) ||
                  // Alt3 (Reset cheat protection)
                  ResetCheatProtectionFalse()
               )
@@ -755,12 +1338,12 @@ achievement(
     title = "Full Clear", points = 5,
     description = "Capture every enemy piece, except the king, and then win the game",
     id = 628904, badge = "719741", published = "06.08.2026 07:07:30", modified = "06.08.2026 07:07:30",
-    trigger = GameFinishedWin() && CheatProtection() &&
+    trigger = trigger_when(GameFinishedWin()) && CheatProtection() &&
               (
                 // Alt1 (Player is white)
-                (PlayerColour_IsWhite() && PieceCountBlack() == 0) ||
+                (PlayerColour_IsWhite() && ActualPieceCountBlack() == 1) ||
                 // Alt2 (Player is black)
-                (PlayerColour_IsBlack() && PieceCountWhite() == 0) || 
+                (PlayerColour_IsBlack() && ActualPieceCountWhite() == 1) || 
                 // Alt3 (Reset cheat protection)
                 ResetCheatProtectionFalse()
               )
@@ -773,9 +1356,9 @@ achievement(
     trigger = trigger_when(GameFinishedWin()) && CheatProtection() &&
               (
                 // Alt1 (Player is white)
-                (once(PlayerColour_IsWhite() && PieceCountBlack() == 11 && PawnCountBlack() == 4 && TurnChangedToPlayer())) ||
+                (once(PlayerColour_IsWhite() && ActualPieceCountBlack() == 12 && ActualPawnsBlack() == 4)) ||
                 // Alt2 (Player is black)
-                (once(PlayerColour_IsBlack() && PieceCountWhite() == 11 && PawnCountWhite() == 4 && TurnChangedToPlayer())) || 
+                (once(PlayerColour_IsBlack() && ActualPieceCountWhite() == 12 && ActualPawnsWhite() == 4)) || 
                 // Alt3 (Reset cheat protection)
                 ResetCheatProtectionFalse()
               )
