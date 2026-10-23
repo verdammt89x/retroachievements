@@ -38,6 +38,7 @@ function MoveCount() => dword(0x01996C)
 // $019978: [8bit] Last move start coordinates
 //          Upper 4 bits: 0-7 = 8-1 (rank)
 //          Lower 4 bits: 0-7 = a-h
+function LastMoveStartCoordinates() => byte(0x019978)
 function LastMoveStartCoordinatesFile() => low4(0x019978)
 function LastMoveStartCoordinatesRank() => high4(0x019978)
 
@@ -294,6 +295,29 @@ function GameEndedState() => byte(0x02DAEC)
 GameEnded_No = 0x00
 GameEnded_Yes = 0x01
 
+// $2DB94: [8bit] Challenge Set 1 score
+// 0x05 = default (1000)
+// 0x59 = 2000
+// Calculation:
+// 1000 + (value - 5) * 1000 / 84
+function ChallengeSet1Score() => byte(0x02DB94)
+
+
+// $2DB98: [8bit] Challenge Set 1 score
+// 0x05 = default (1000)
+// 0x59 = 2000
+// Calculation:
+// 1000 + (value - 5) * 1000 / 84
+function ChallengeSet2Score() => byte(0x02DB98)
+
+
+// $2DB9C: [8bit] Challenge Set 1 score
+// 0x05 = default (1000)
+// 0x59 = 2000
+// Calculation:
+// 1000 + (value - 5) * 1000 / 84
+function ChallengeSet3Score() => byte(0x02DB9C)
+
 // $03071C: [8bit] Opponent
 //          0x01 = Ryan
 //          0x02 = Ben
@@ -349,6 +373,8 @@ WhoPlays_AIVsAI = 0x02
 //          0x02 = Black
 function PlayerColourByte() => byte(0x0307A0)
 function PlayerColour() => low4(0x0307A0)
+
+function SelectedChessRater() => byte(0x030833)
 
 // $0309FC: [8bit] Current Menu
 //          0x01 = Loading Screen
@@ -532,16 +558,14 @@ function GameFinishedDrawStalemate() {
 
 // Detects a Queenside castle for white
 function CastleQueensideWhite() {
-    return (PlayerColour() == Colour_White && once(prev(ActualPieceOnA1()) == Piece_RookW && ActualPieceOnA1() == Piece_None) &&
-             once(prev(ActualPieceOnC1()) == Piece_None && ActualPieceOnC1() == Piece_KingW) &&
-             once(prev(ActualPieceOnD1()) == Piece_None && ActualPieceOnD1() == Piece_RookW))
+    return PlayerColour() == Colour_White && LastMoveEndCoordinates() == 0x72 && LastMoveStartCoordinates() == 0x74 &&
+           prev(ActualPieceOnC1()) == Piece_None && ActualPieceOnC1() == Piece_KingW
 }
 
 // Detects a Queenside castle for black
 function CastleQueensideBlack() {
-    return (PlayerColour() == Colour_Black && once(prev(ActualPieceOnA8()) == Piece_RookB && ActualPieceOnA8() == Piece_None) &&
-             once(prev(ActualPieceOnC8()) == Piece_None && ActualPieceOnC8() == Piece_KingB) &&
-             once(prev(ActualPieceOnD8()) == Piece_None && ActualPieceOnD8() == Piece_RookB))
+    return PlayerColour() == Colour_Black && LastMoveEndCoordinates() == 0x02 && LastMoveStartCoordinates() == 0x04 &&
+           prev(ActualPieceOnC8()) == Piece_None && ActualPieceOnC8() == Piece_KingB
 }
 
 // General Queenside castle
@@ -1461,30 +1485,24 @@ achievement(
     title = "What's My ELO?", points = 10,
     description = "Reach at least 2000 Rating in Challenge Set 1",
     id = 628673, badge = "719751", published = "05.08.2026 13:08:39", modified = "05.08.2026 13:08:39",
-    trigger = CurrentMenu() == CurrentMenu_ChessRater &&
-              once(prev(FirstCharacterChallengeSet1()) == 49 && FirstCharacterChallengeSet1() == 66) &&
-              once(prev(FirstCharacterChallengeSet1()) == 66 && FirstCharacterChallengeSet1() == 50) &&
-              never(FirstCharacterChallengeSet1() == 49)
+    trigger = SelectedChessRater() == 0x01 &&
+              prev(ChallengeSet1Score()) < 0x59 && ChallengeSet1Score() >= 0x59
 )
 
 achievement(
     title = "Climbing the Ranks", points = 10,
     description = "Reach at least 2000 Rating in Challenge Set 2",
     id = 628674, badge = "719752", published = "05.08.2026 13:08:39", modified = "05.08.2026 13:08:39",
-    trigger = CurrentMenu() == CurrentMenu_ChessRater &&
-              once(prev(FirstCharacterChallengeSet2()) == 49 && FirstCharacterChallengeSet2() == 66) &&
-              once(prev(FirstCharacterChallengeSet2()) == 66 && FirstCharacterChallengeSet2() == 50) &&
-              never(FirstCharacterChallengeSet2() == 49)
+    trigger = SelectedChessRater() == 0x02 &&
+              prev(ChallengeSet2Score()) < 0x59 && ChallengeSet2Score() >= 0x59
 )
 
 achievement(
     title = "Road to Grandmaster", points = 10,
     description = "Reach at least 2000 Rating in Challenge Set 3",
     id = 628675, badge = "719753", published = "05.08.2026 13:08:39", modified = "05.08.2026 13:08:39",
-    trigger = CurrentMenu() == CurrentMenu_ChessRater &&
-              once(prev(FirstCharacterChallengeSet3()) == 49 && FirstCharacterChallengeSet3() == 66) &&
-              once(prev(FirstCharacterChallengeSet3()) == 66 && FirstCharacterChallengeSet3() == 50) &&
-              never(FirstCharacterChallengeSet3() == 49)
+    trigger = SelectedChessRater() == 0x03 &&
+              prev(ChallengeSet3Score()) < 0x59 && ChallengeSet3Score() >= 0x59
 )
 
 leaderboard(
