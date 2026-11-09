@@ -606,6 +606,7 @@ function DefeatOpponentWithTrigger(opponent) {
     return trigger_when(GameFinishedWinOpponent(opponent)) && CheatProtection() || ResetCheatProtection()
 }
 
+
 function ActualPawnsWhite() {
     return ActualChessBoard[0][0] / 0x15 - ActualChessBoard[0][0] / 0x16 +
            ActualChessBoard[0][1] / 0x15 - ActualChessBoard[0][1] / 0x16 +
@@ -874,6 +875,14 @@ function ActualPieceCountBlack() {
            ActualChessBoardColour[7][7] / 2
 }
 
+function ActualNonPawnsWhite() {
+    return ActualPieceCountWhite() - ActualPawnsWhite()
+}
+
+function ActualNonPawnsBlack() {
+    return ActualPieceCountBlack() - ActualPawnsBlack()
+}
+
 function PieceCountWhiteVsBlack() {
     return ActualChessBoardColour[0][0] % 2 +
            ActualChessBoardColour[0][1] % 2 +
@@ -1004,6 +1013,7 @@ function PieceCountWhiteVsBlack() {
            ActualChessBoardColour[7][6] / 2 -
            ActualChessBoardColour[7][7] / 2
 }
+
 
 function PieceCountBlackVsWhite() {
     return ActualChessBoardColour[0][0] / 2 +
@@ -1136,6 +1146,116 @@ function PieceCountBlackVsWhite() {
            ActualChessBoardColour[7][7] % 2
 }
 
+R_NonPawns_Black = remembered(ActualNonPawnsBlack())
+R_NonPawns_White = remembered(ActualNonPawnsWhite())
+
+function MeasureWhitePawnCaptures() {
+    return tally(4, 
+        R_NonPawns_White == 8 && prev(ActualChessBoard[1][0] == Piece_PawnW) && ActualChessBoardColour[1][0] == Colour_Black,
+        prev(ActualChessBoard[1][1] == Piece_PawnW) && ActualChessBoardColour[1][1] == Colour_Black,
+        prev(ActualChessBoard[1][2] == Piece_PawnW) && ActualChessBoardColour[1][2] == Colour_Black,
+        prev(ActualChessBoard[1][3] == Piece_PawnW) && ActualChessBoardColour[1][3] == Colour_Black,
+        prev(ActualChessBoard[1][4] == Piece_PawnW) && ActualChessBoardColour[1][4] == Colour_Black,
+        prev(ActualChessBoard[1][5] == Piece_PawnW) && ActualChessBoardColour[1][5] == Colour_Black,
+        prev(ActualChessBoard[1][6] == Piece_PawnW) && ActualChessBoardColour[1][6] == Colour_Black,
+        prev(ActualChessBoard[1][7] == Piece_PawnW) && ActualChessBoardColour[1][7] == Colour_Black,
+        prev(ActualChessBoard[2][0] == Piece_PawnW) && ActualChessBoardColour[2][0] == Colour_Black,
+        prev(ActualChessBoard[2][1] == Piece_PawnW) && ActualChessBoardColour[2][1] == Colour_Black,
+        prev(ActualChessBoard[2][2] == Piece_PawnW) && ActualChessBoardColour[2][2] == Colour_Black,
+        prev(ActualChessBoard[2][3] == Piece_PawnW) && ActualChessBoardColour[2][3] == Colour_Black,
+        prev(ActualChessBoard[2][4] == Piece_PawnW) && ActualChessBoardColour[2][4] == Colour_Black,
+        prev(ActualChessBoard[2][5] == Piece_PawnW) && ActualChessBoardColour[2][5] == Colour_Black,
+        prev(ActualChessBoard[2][6] == Piece_PawnW) && ActualChessBoardColour[2][6] == Colour_Black,
+        prev(ActualChessBoard[2][7] == Piece_PawnW) && ActualChessBoardColour[2][7] == Colour_Black,
+        prev(ActualChessBoard[3][0] == Piece_PawnW) && ActualChessBoardColour[3][0] == Colour_Black,
+        prev(ActualChessBoard[3][1] == Piece_PawnW) && ActualChessBoardColour[3][1] == Colour_Black,
+        prev(ActualChessBoard[3][2] == Piece_PawnW) && ActualChessBoardColour[3][2] == Colour_Black,
+        prev(ActualChessBoard[3][3] == Piece_PawnW) && ActualChessBoardColour[3][3] == Colour_Black,
+        prev(ActualChessBoard[3][4] == Piece_PawnW) && ActualChessBoardColour[3][4] == Colour_Black,
+        prev(ActualChessBoard[3][5] == Piece_PawnW) && ActualChessBoardColour[3][5] == Colour_Black,
+        prev(ActualChessBoard[3][6] == Piece_PawnW) && ActualChessBoardColour[3][6] == Colour_Black,
+        prev(ActualChessBoard[3][7] == Piece_PawnW) && ActualChessBoardColour[3][7] == Colour_Black,
+        prev(ActualChessBoard[4][0] == Piece_PawnW) && ActualChessBoardColour[4][0] == Colour_Black,
+        prev(ActualChessBoard[4][1] == Piece_PawnW) && ActualChessBoardColour[4][1] == Colour_Black,
+        prev(ActualChessBoard[4][2] == Piece_PawnW) && ActualChessBoardColour[4][2] == Colour_Black,
+        prev(ActualChessBoard[4][3] == Piece_PawnW) && ActualChessBoardColour[4][3] == Colour_Black,
+        prev(ActualChessBoard[4][4] == Piece_PawnW) && ActualChessBoardColour[4][4] == Colour_Black,
+        prev(ActualChessBoard[4][5] == Piece_PawnW) && ActualChessBoardColour[4][5] == Colour_Black,
+        prev(ActualChessBoard[4][6] == Piece_PawnW) && ActualChessBoardColour[4][6] == Colour_Black,
+        prev(ActualChessBoard[4][7] == Piece_PawnW) && ActualChessBoardColour[4][7] == Colour_Black,
+        prev(ActualChessBoard[5][0] == Piece_PawnW) && ActualChessBoardColour[5][0] == Colour_Black,
+        prev(ActualChessBoard[5][1] == Piece_PawnW) && ActualChessBoardColour[5][1] == Colour_Black,
+        prev(ActualChessBoard[5][2] == Piece_PawnW) && ActualChessBoardColour[5][2] == Colour_Black,
+        prev(ActualChessBoard[5][3] == Piece_PawnW) && ActualChessBoardColour[5][3] == Colour_Black,
+        prev(ActualChessBoard[5][4] == Piece_PawnW) && ActualChessBoardColour[5][4] == Colour_Black,
+        prev(ActualChessBoard[5][5] == Piece_PawnW) && ActualChessBoardColour[5][5] == Colour_Black,
+        prev(ActualChessBoard[5][6] == Piece_PawnW) && ActualChessBoardColour[5][6] == Colour_Black,
+        prev(ActualChessBoard[5][7] == Piece_PawnW) && ActualChessBoardColour[5][7] == Colour_Black,
+        prev(ActualChessBoard[6][0] == Piece_PawnW) && ActualChessBoardColour[6][0] == Colour_Black,
+        prev(ActualChessBoard[6][1] == Piece_PawnW) && ActualChessBoardColour[6][1] == Colour_Black,
+        prev(ActualChessBoard[6][2] == Piece_PawnW) && ActualChessBoardColour[6][2] == Colour_Black,
+        prev(ActualChessBoard[6][3] == Piece_PawnW) && ActualChessBoardColour[6][3] == Colour_Black,
+        prev(ActualChessBoard[6][4] == Piece_PawnW) && ActualChessBoardColour[6][4] == Colour_Black,
+        prev(ActualChessBoard[6][5] == Piece_PawnW) && ActualChessBoardColour[6][5] == Colour_Black,
+        prev(ActualChessBoard[6][6] == Piece_PawnW) && ActualChessBoardColour[6][6] == Colour_Black,
+        prev(ActualChessBoard[6][7] == Piece_PawnW) && ActualChessBoardColour[6][7] == Colour_Black,
+        PlayersTurn() != PlayerColour() && prev(EnPassant()) == 0 && EnPassant() == 1
+        )
+}
+
+function MeasureBlackPawnCaptures() {
+    return tally(4, 
+        R_NonPawns_Black == 8 && prev(ActualChessBoard[1][0] == Piece_PawnB) && ActualChessBoardColour[1][0] == Colour_White,
+        prev(ActualChessBoard[1][1] == Piece_PawnB) && ActualChessBoardColour[1][1] == Colour_White,
+        prev(ActualChessBoard[1][2] == Piece_PawnB) && ActualChessBoardColour[1][2] == Colour_White,
+        prev(ActualChessBoard[1][3] == Piece_PawnB) && ActualChessBoardColour[1][3] == Colour_White,
+        prev(ActualChessBoard[1][4] == Piece_PawnB) && ActualChessBoardColour[1][4] == Colour_White,
+        prev(ActualChessBoard[1][5] == Piece_PawnB) && ActualChessBoardColour[1][5] == Colour_White,
+        prev(ActualChessBoard[1][6] == Piece_PawnB) && ActualChessBoardColour[1][6] == Colour_White,
+        prev(ActualChessBoard[1][7] == Piece_PawnB) && ActualChessBoardColour[1][7] == Colour_White,
+        prev(ActualChessBoard[2][0] == Piece_PawnB) && ActualChessBoardColour[2][0] == Colour_White,
+        prev(ActualChessBoard[2][1] == Piece_PawnB) && ActualChessBoardColour[2][1] == Colour_White,
+        prev(ActualChessBoard[2][2] == Piece_PawnB) && ActualChessBoardColour[2][2] == Colour_White,
+        prev(ActualChessBoard[2][3] == Piece_PawnB) && ActualChessBoardColour[2][3] == Colour_White,
+        prev(ActualChessBoard[2][4] == Piece_PawnB) && ActualChessBoardColour[2][4] == Colour_White,
+        prev(ActualChessBoard[2][5] == Piece_PawnB) && ActualChessBoardColour[2][5] == Colour_White,
+        prev(ActualChessBoard[2][6] == Piece_PawnB) && ActualChessBoardColour[2][6] == Colour_White,
+        prev(ActualChessBoard[2][7] == Piece_PawnB) && ActualChessBoardColour[2][7] == Colour_White,
+        prev(ActualChessBoard[3][0] == Piece_PawnB) && ActualChessBoardColour[3][0] == Colour_White,
+        prev(ActualChessBoard[3][1] == Piece_PawnB) && ActualChessBoardColour[3][1] == Colour_White,
+        prev(ActualChessBoard[3][2] == Piece_PawnB) && ActualChessBoardColour[3][2] == Colour_White,
+        prev(ActualChessBoard[3][3] == Piece_PawnB) && ActualChessBoardColour[3][3] == Colour_White,
+        prev(ActualChessBoard[3][4] == Piece_PawnB) && ActualChessBoardColour[3][4] == Colour_White,
+        prev(ActualChessBoard[3][5] == Piece_PawnB) && ActualChessBoardColour[3][5] == Colour_White,
+        prev(ActualChessBoard[3][6] == Piece_PawnB) && ActualChessBoardColour[3][6] == Colour_White,
+        prev(ActualChessBoard[3][7] == Piece_PawnB) && ActualChessBoardColour[3][7] == Colour_White,
+        prev(ActualChessBoard[4][0] == Piece_PawnB) && ActualChessBoardColour[4][0] == Colour_White,
+        prev(ActualChessBoard[4][1] == Piece_PawnB) && ActualChessBoardColour[4][1] == Colour_White,
+        prev(ActualChessBoard[4][2] == Piece_PawnB) && ActualChessBoardColour[4][2] == Colour_White,
+        prev(ActualChessBoard[4][3] == Piece_PawnB) && ActualChessBoardColour[4][3] == Colour_White,
+        prev(ActualChessBoard[4][4] == Piece_PawnB) && ActualChessBoardColour[4][4] == Colour_White,
+        prev(ActualChessBoard[4][5] == Piece_PawnB) && ActualChessBoardColour[4][5] == Colour_White,
+        prev(ActualChessBoard[4][6] == Piece_PawnB) && ActualChessBoardColour[4][6] == Colour_White,
+        prev(ActualChessBoard[4][7] == Piece_PawnB) && ActualChessBoardColour[4][7] == Colour_White,
+        prev(ActualChessBoard[5][0] == Piece_PawnB) && ActualChessBoardColour[5][0] == Colour_White,
+        prev(ActualChessBoard[5][1] == Piece_PawnB) && ActualChessBoardColour[5][1] == Colour_White,
+        prev(ActualChessBoard[5][2] == Piece_PawnB) && ActualChessBoardColour[5][2] == Colour_White,
+        prev(ActualChessBoard[5][3] == Piece_PawnB) && ActualChessBoardColour[5][3] == Colour_White,
+        prev(ActualChessBoard[5][4] == Piece_PawnB) && ActualChessBoardColour[5][4] == Colour_White,
+        prev(ActualChessBoard[5][5] == Piece_PawnB) && ActualChessBoardColour[5][5] == Colour_White,
+        prev(ActualChessBoard[5][6] == Piece_PawnB) && ActualChessBoardColour[5][6] == Colour_White,
+        prev(ActualChessBoard[5][7] == Piece_PawnB) && ActualChessBoardColour[5][7] == Colour_White,
+        prev(ActualChessBoard[6][0] == Piece_PawnB) && ActualChessBoardColour[6][0] == Colour_White,
+        prev(ActualChessBoard[6][1] == Piece_PawnB) && ActualChessBoardColour[6][1] == Colour_White,
+        prev(ActualChessBoard[6][2] == Piece_PawnB) && ActualChessBoardColour[6][2] == Colour_White,
+        prev(ActualChessBoard[6][3] == Piece_PawnB) && ActualChessBoardColour[6][3] == Colour_White,
+        prev(ActualChessBoard[6][4] == Piece_PawnB) && ActualChessBoardColour[6][4] == Colour_White,
+        prev(ActualChessBoard[6][5] == Piece_PawnB) && ActualChessBoardColour[6][5] == Colour_White,
+        prev(ActualChessBoard[6][6] == Piece_PawnB) && ActualChessBoardColour[6][6] == Colour_White,
+        prev(ActualChessBoard[6][7] == Piece_PawnB) && ActualChessBoardColour[6][7] == Colour_White,
+        PlayersTurn() != PlayerColour() && prev(EnPassant()) == 0 && EnPassant() == 1
+        )
+}
 
 achievement(
     title = "WARNING", points = 0,
@@ -1380,9 +1500,9 @@ achievement(
     trigger = trigger_when(GameFinishedWin()) && CheatProtection() &&
               (
                 // Alt1 (Player is white)
-                (once(PlayerColour_IsWhite() && ActualPieceCountBlack() == 12 && ActualPawnsBlack() == 4)) ||
+                (once(PlayerColour_IsWhite() && prev(ActualPieceCountBlack() == 13) && ActualPieceCountBlack() == 12 && ActualPawnsBlack() == 4)) ||
                 // Alt2 (Player is black)
-                (once(PlayerColour_IsBlack() && ActualPieceCountWhite() == 12 && ActualPawnsWhite() == 4)) || 
+                (once(PlayerColour_IsBlack() && prev(ActualPieceCountWhite() == 13) && ActualPieceCountWhite() == 12 && ActualPawnsWhite() == 4)) || 
                 // Alt3 (Reset cheat protection)
                 ResetCheatProtectionFalse()
               )
